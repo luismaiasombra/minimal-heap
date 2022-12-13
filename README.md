@@ -1,4 +1,6 @@
-To download this software, choose a folder in your computer and run "git clone https://github.com/luismaiasombra/minimal-heap.git"  
+## Minimal Heap
+
+To download this software, choose a folder in your computer and run "git clone https://github.com/luismaiasombra/minimal-heap.git" or download [here](https://github.com/luismaiasombra/minimal-heap/archive/refs/heads/main.zip)
 To compile the program, run "gcc -o program.exe TR5_536653.c main4.c"
 To run the program do "program.exe" in your terminal  
 Enter numbers in the terminal to insert them into the minimal heap  
