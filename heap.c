@@ -36,10 +36,9 @@ void HEAP_add(HEAP* heap, void* newelem) {
         heap->elems[heap->P] = newelem;
         heap->P=heap->P+1;
         int i = heap->P-1;
-        //printf("inserindo %d \n",*(int*)newelem);
-        //printf("iniciando no i = %d\n",i);
+        
         void* fe;void* pai;void* fd;
-        //printf("last element is %p at index %d\n", heap->elems[i],i);
+        
         while (i>0) {
             if (i==0) {
                 break;
@@ -65,7 +64,7 @@ void HEAP_add(HEAP* heap, void* newelem) {
                     heap->elems[i/2-1] = aux;
                 }
             }
-            //printf("up to level %d\n",i);
+            
             if (i%2==1) {
                 i = i /2;
             } else {
@@ -79,23 +78,5 @@ void HEAP_add(HEAP* heap, void* newelem) {
         //quando o P é igual a N
         return;
     }
-    //printf("fim das trocas\n");
+    
 }
-/*
-void* HEAP_remove(HEAP* heap) {
-    return;
-    void* last = heap->elems[heap->P-1];
-    void* lixo = heap->elems[0];
-    heap->elems[0] = last; int i = 0; void* fd;void* fe;void* aux;
-    while (i<heap->N/2) {
-        fe = heap->elems[2*i];fd = heap->elems[2*i+1];
-        if (heap->comparador(fe,fd)==-1) { //filho esquerdo maior que o direito
-            int k =0;
-        } else {
-            int k =0;
-        }
-    }
-    //diminuir o P e ajeitar a posicao
-    return heap;
-}
-*/
