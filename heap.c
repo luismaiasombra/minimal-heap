@@ -5,6 +5,7 @@
 
 
 HEAP* HEAP_create(int n, COMP* compara) {
+    //the heap structure is created
     HEAP* heap = malloc(sizeof(heap));
     heap->N = n;
     heap->P = 0;
@@ -18,12 +19,13 @@ void HEAP_add(HEAP* heap, void* newelem) {
     int (*comp)(void*,void*) = heap->comparador;
    
     if (heap->P == 0) {
-        
+        //if the heap has no elements, it receives the newelement in its first position
         heap->elems[0] =newelem;
         heap->P++;
         //printf("P is zero\n");
         return;
     } else if (heap->P<heap->N) {
+        //if the heap is able to receive a new elems (P<N), it receives at index P.
         heap->elems[heap->P] = newelem;
         heap->P=heap->P+1;
         int i = heap->P-1;
@@ -35,7 +37,7 @@ void HEAP_add(HEAP* heap, void* newelem) {
                 break;
             }
             if (i%2==1) {
-                //se o i for filho esquerda, neste caso pai = filho/2
+                //if i corresponds to a left-side child, parent = child/2
                 fe=heap->elems[i]; pai = heap->elems[i/2];
                 if (comp(fe,pai)==1) {
                     //printf("troca fe %d com %d\n",*(int*)heap->elems[i],*(int*)heap->elems[i/2]);
@@ -44,9 +46,7 @@ void HEAP_add(HEAP* heap, void* newelem) {
                     heap->elems[i] = aux;
                 }
             } else {
-                
-                //se o i for índice de filho direito, pai = filho/2-1
-                //se o i for filho esquerdo, neste caso pai = filho/2
+                //if i corresponds to a right-side child, parent = child/2-1
                 fd=heap->elems[i]; pai = heap->elems[i/2-1];
                 if (comp(fd,pai)==1) {
                     
@@ -55,7 +55,7 @@ void HEAP_add(HEAP* heap, void* newelem) {
                     heap->elems[i/2-1] = aux;
                 }
             }
-            
+            //now we "bubble up"
             if (i%2==1) {
                 i = i /2;
             } else {
@@ -65,8 +65,7 @@ void HEAP_add(HEAP* heap, void* newelem) {
         
         return;
     } else {
-        //printf("the heap is complete\n");
-        //quando o P é igual a N
+        //this condition happens if P == N;
         return;
     }
     
