@@ -3,16 +3,7 @@
 #include "heap.h"
 //heap.c ta ok
 
-/*
 
-typedef struct heap{
-	int N;//tamanho do vetor
-	int P;//numero de elementos no vetor
-	void** elems;//o vetor de elementos
-	COMP* comparador;//a funcao de comparacao
-}HEAP;
-
-*/
 HEAP* HEAP_create(int n, COMP* compara) {
     HEAP* heap = malloc(sizeof(heap));
     heap->N = n;
@@ -27,7 +18,7 @@ void HEAP_add(HEAP* heap, void* newelem) {
     int (*comp)(void*,void*) = heap->comparador;
    
     if (heap->P == 0) {
-        //printf("inserindo %d \n",*(int*)newelem);
+        
         heap->elems[0] =newelem;
         heap->P++;
         //printf("P is zero\n");
@@ -54,11 +45,11 @@ void HEAP_add(HEAP* heap, void* newelem) {
                 }
             } else {
                 
-                //se o i for index de filho direito, pai = filho/2-1
-                //se o i for filho esquerda, neste caso pai = filho/2
+                //se o i for índice de filho direito, pai = filho/2-1
+                //se o i for filho esquerdo, neste caso pai = filho/2
                 fd=heap->elems[i]; pai = heap->elems[i/2-1];
                 if (comp(fd,pai)==1) {
-                    //printf("troca fd %d com %d\n",*(int*)heap->elems[i],*(int*)heap->elems[i/2-1]);
+                    
                     void * aux = heap->elems[i];
                     heap->elems[i] = heap->elems[i/2-1];
                     heap->elems[i/2-1] = aux;
