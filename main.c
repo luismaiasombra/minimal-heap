@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "heap.h"
 
-
+//The following function can be whatever comparison function you want.
 int comparison(void* x, void* y){
     if(*(int*)x == *(int*)y){
         return 0;
