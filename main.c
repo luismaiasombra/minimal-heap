@@ -3,7 +3,7 @@
 #include "heap.h"
 
 
-int comparacao(void* x, void* y){
+int comparison(void* x, void* y){
     if(*(int*)x == *(int*)y){
         return 0;
     }else if(*(int*)x > *(int*)y){
@@ -14,27 +14,27 @@ int comparacao(void* x, void* y){
 }
 
 int main(){
-    COMP* comp = comparacao;
-    int t = 0;
-    printf("Tamanho vetor: ");
-    scanf("%d", &t);
-    HEAP* veto = HEAP_create(t, comp);
+    COMP* comp = comparison;
+    int initialSize = 0;
+    printf("Size of the vector: ");
+    scanf("%d", &initialSize);
+    HEAP* heap = HEAP_create(initialSize, comp);
     int in[90] = {};
     int i = 0;
+    //the following while-loop adds elements to the heap's vector
     while(in[i] >= 0){
         printf("NUM: ");
         scanf("%d", &in[i]);
         if(in[i] >= 0){
-            HEAP_add(veto, &in[i]);
+            HEAP_add(heap, &in[i]);
             i++;
         }
     }
     
     
-    //veto->elems[200] = "oi";
-    //printf("%d removido\n", *(int*)HEAP_remove(veto));
-    for(int i = 0;i<veto->P;i++){
-        printf("%d ", *(int*)veto->elems[i]);
+   //the following for-loop prints all elements inside the heap's vector
+    for(int i = 0;i<heap->P;i++){
+        printf("%d ", *(int*)heap->elems[i]);
     }
     //printf(veto->elems[200]);
     return 0;

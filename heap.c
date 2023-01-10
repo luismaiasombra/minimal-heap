@@ -1,36 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "heap.h"
-//heap.c ta ok
 
 
-HEAP* HEAP_create(int n, COMP* compara) {
+
+HEAP* HEAP_create(int n, COMP* comparePointer) {
     //the heap structure is created
     HEAP* heap = malloc(sizeof(heap));
     heap->N = n;
     heap->P = 0;
     heap->elems = (void**) malloc(heap->N*sizeof(void*));
-    heap->comparador = compara;
+    heap->comparator = comparePointer;
     return heap;
 }
 
 
 void HEAP_add(HEAP* heap, void* newelem) {
-    int (*comp)(void*,void*) = heap->comparador;
+    //the following function pointer receives the heap's comparison function adress
+    int (*comp)(void*,void*) = heap->comparator;
    
     if (heap->P == 0) {
-        //if the heap has no elements, it receives the newelement in its first position
+        //if the heap has no elements, it receives the newelement at its first position
         heap->elems[0] =newelem;
         heap->P++;
         //printf("P is zero\n");
         return;
     } else if (heap->P<heap->N) {
-        //if the heap is able to receive a new elems (P<N), it receives at index P.
+        //if the heap is able to receive a new elems (P<N), it receives at index P (last index).
         heap->elems[heap->P] = newelem;
         heap->P=heap->P+1;
         int i = heap->P-1;
         
-        void* fe;void* pai;void* fd;
+        void* leftChild;void* parent;void* rightChild;
         
         while (i>0) {
             if (i==0) {
@@ -38,17 +39,17 @@ void HEAP_add(HEAP* heap, void* newelem) {
             }
             if (i%2==1) {
                 //if i corresponds to a left-side child, parent = child/2
-                fe=heap->elems[i]; pai = heap->elems[i/2];
-                if (comp(fe,pai)==1) {
-                    //printf("troca fe %d com %d\n",*(int*)heap->elems[i],*(int*)heap->elems[i/2]);
+                leftChild=heap->elems[i]; parent = heap->elems[i/2];
+                if (comp(leftChild,parent)==1) {
+                    //printf("troca leftChild %d com %d\n",*(int*)heap->elems[i],*(int*)heap->elems[i/2]);
                     void * aux = heap->elems[i/2];
                     heap->elems[i/2] = heap->elems[i];
                     heap->elems[i] = aux;
                 }
             } else {
                 //if i corresponds to a right-side child, parent = child/2-1
-                fd=heap->elems[i]; pai = heap->elems[i/2-1];
-                if (comp(fd,pai)==1) {
+                rightChild=heap->elems[i]; parent = heap->elems[i/2-1];
+                if (comp(rightChild,parent)==1) {
                     
                     void * aux = heap->elems[i];
                     heap->elems[i] = heap->elems[i/2-1];
